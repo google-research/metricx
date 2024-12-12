@@ -138,7 +138,10 @@ def main() -> None:
 
   tokenizer = transformers.AutoTokenizer.from_pretrained(args.tokenizer)
 
-  model = models.MT5ForRegression.from_pretrained(args.model_name_or_path)
+  model = models.MT5ForRegression.from_pretrained(
+      args.model_name_or_path, torch_dtype="auto"
+  )
+
   model.to(device)
   model.eval()
 

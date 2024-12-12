@@ -14,17 +14,25 @@ then converted for use in PyTorch.
 
 ## Available Models
 
-There are 3 MetricX-24 models and 6 MetricX-23 models available on HuggingFace
+There are 3 MetricX-24 models and 6 MetricX-23 models available on Hugging Face
 that vary in the number of parameters. The MetricX-23 models further vary in
 whether or not the model is reference-based or reference-free (also known as
 quality estimation, or QE), whereas the MetricX-24 models are all hybrid models
-that can do both reference-based and QE inference:
+that can do both reference-based and QE inference. Finally, we also offer
+lower-precision (bfloat16) MetricX-24 model variants with a 50% lower memory
+footprint.
 
 **MetricX-24:**
 
 * [MetricX-24-Hybrid-XXL](https://huggingface.co/google/metricx-24-hybrid-xxl-v2p6)
 * [MetricX-24-Hybrid-XL](https://huggingface.co/google/metricx-24-hybrid-xl-v2p6)
 * [MetricX-24-Hybrid-Large](https://huggingface.co/google/metricx-24-hybrid-large-v2p6)
+
+**MetricX-24 (bfloat16):**
+
+* [MetricX-24-Hybrid-XXL](https://huggingface.co/google/metricx-24-hybrid-xxl-v2p6-bfloat16)
+* [MetricX-24-Hybrid-XL](https://huggingface.co/google/metricx-24-hybrid-xl-v2p6-bfloat16)
+* [MetricX-24-Hybrid-Large](https://huggingface.co/google/metricx-24-hybrid-large-v2p6-bfloat16)
 
 **MetricX-23:**
 
@@ -180,7 +188,7 @@ For use with MetricX-23 models, `input.jsonl` is expected to have 1 serialized
 JSON object per line with only the `"hypothesis"` and `"reference"` fields (no
 `"source"`).
 
-Note that the models were trained with a maximum input length of 1536 and 1024
+WARNING: The models were trained with a maximum input length of 1536 and 1024
 tokens, respectively, so significantly increasing that value may lead to
 unpredictable behavior.
 
@@ -284,6 +292,9 @@ MetricX-24 (WMT'24):
 NOTE: Since MetricX-24 models are hybrid models, MetricX-24-\<size\> and
 MetricX-24-QE-\<size\> correspond to the same model, evaluated *with* and
 *without* the references, respectively.
+
+NOTE: The performance of the bfloat16 model counterparts deviates by less than
+0.001 from the above results across both metrics and all language pairs.
 
 MetricX-23 (WMT'22 en-de):
 
