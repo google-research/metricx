@@ -162,8 +162,8 @@ python -m metricx24.predict \
   --model_name_or_path google/metricx-24-hybrid-xl-v2p6 \
   --max_input_length 1536 \
   --batch_size 1 \
-  --input_file input.jsonl \
-  --output_file output.jsonl
+  --input_file ./input.jsonl \
+  --output_file ./output.jsonl
 ```
 
 `input.jsonl` is expected to have 1 serialized JSON object per line with
@@ -171,6 +171,15 @@ python -m metricx24.predict \
 available, the empty string can be passed as the value of `"source"`. The output
 jsonl will be parallel to `input.jsonl` but additionally contain a
 `"prediction"` field with the predicted score.
+
+Example of `input.jsonl`:
+```
+{"source": "I am a boy", "hypothesis": "Soy un chico", "reference": "Soy un chico"}
+```
+Example of `output.jsonl`:
+```
+{"source": "I am a boy", "hypothesis": "Soy un chico", "reference": "Soy un chico", "prediction": 0}
+```
 
 Example usage for a reference-based MetricX-23 model:
 
@@ -180,8 +189,8 @@ python -m metricx23.predict \
   --model_name_or_path google/metricx-23-xl-v2p0 \
   --max_input_length 1024 \
   --batch_size 1 \
-  --input_file input.jsonl \
-  --output_file output.jsonl
+  --input_file ./input.jsonl \
+  --output_file ./output.jsonl
 ```
 
 For use with MetricX-23 models, `input.jsonl` is expected to have 1 serialized
@@ -202,8 +211,8 @@ python -m metricx24.predict \
   --model_name_or_path google/metricx-24-hybrid-xl-v2p6 \
   --max_input_length 1536 \
   --batch_size 1 \
-  --input_file input.jsonl \
-  --output_file output.jsonl \
+  --input_file ./input.jsonl \
+  --output_file ./output.jsonl \
   --qe
 ```
 
@@ -223,8 +232,8 @@ python -m metricx23.predict \
   --model_name_or_path google/metricx-23-qe-xl-v2p0 \
   --max_input_length 1024 \
   --batch_size 1 \
-  --input_file input.jsonl \
-  --output_file output.jsonl \
+  --input_file ./input.jsonl \
+  --output_file ./output.jsonl \
   --qe
 ```
 
@@ -246,8 +255,8 @@ Example usage for a MetricX-24 model:
 python -m metricx24.evaluate \
   --dataset wmt24 \
   --lp en-es \
-  --input_file input.jsonl \
-  --output_file output.json
+  --input_file ./input.jsonl \
+  --output_file ./output.json
 ```
 
 Example usage for a MetricX-23 model:
@@ -256,8 +265,8 @@ Example usage for a MetricX-23 model:
 python -m metricx23.evaluate \
   --dataset wmt22 \
   --lp en-de \
-  --input_file input.jsonl \
-  --output_file output.json
+  --input_file ./input.jsonl \
+  --output_file ./output.json
 ```
 
 `input.jsonl` is expected to have one JSON object serialized per line.
@@ -341,20 +350,20 @@ Example usage for a MetricX-24 model:
 
 ```bash
 python -m metricx24.evaluate_wmt24 \
-  --en_de predictions_ende.jsonl \
-  --en_es predictions_enes.jsonl \
-  --ja_zh predictions_jazh.jsonl \
-  --output_file output.json
+  --en_de ./predictions_ende.jsonl \
+  --en_es ./predictions_enes.jsonl \
+  --ja_zh ./predictions_jazh.jsonl \
+  --output_file ./output.json
 ```
 
 Example usage for a MetricX-23 model:
 
 ```bash
 python -m metricx23.evaluate_wmt23 \
-  --en_de predictions_ende.jsonl \
-  --he_en predictions_heen.jsonl \
-  --zh_en predictions_zhen.jsonl \
-  --output_file output.json
+  --en_de ./predictions_ende.jsonl \
+  --he_en ./predictions_heen.jsonl \
+  --zh_en ./predictions_zhen.jsonl \
+  --output_file ./output.json
 ```
 
 Each of the 3 input files is expected to be in the same format as described
