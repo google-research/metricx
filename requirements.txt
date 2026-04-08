@@ -1,4 +1,4 @@
-transformers[torch]==4.30.2
+transformers[torch]==5.0.0rc3
 sentencepiece==0.1.99
 datasets==2.13.1
 git+https://github.com/google-research/mt-metrics-eval
