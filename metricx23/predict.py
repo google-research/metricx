@@ -153,9 +153,11 @@ def main() -> None:
       per_device_eval_batch_size=per_device_batch_size,
       dataloader_pin_memory=False,
   )
+  data_collator = transformers.DataCollatorWithPadding(tokenizer=tokenizer)
   trainer = transformers.Trainer(
       model=model,
       args=training_args,
+      data_collator=data_collator,
   )
   predictions, _, _ = trainer.predict(test_dataset=ds["test"])
 
