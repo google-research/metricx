@@ -31,9 +31,8 @@ MT5Config = transformers.models.mt5.modeling_mt5.MT5Config
 MT5PreTrainedModel = transformers.models.mt5.modeling_mt5.MT5PreTrainedModel
 MT5Stack = transformers.models.mt5.modeling_mt5.MT5Stack
 
-__HEAD_MASK_WARNING_MSG = (
-    transformers.models.mt5.modeling_mt5.__HEAD_MASK_WARNING_MSG  # pylint: disable=protected-access
-)
+__HEAD_MASK_WARNING_MSG = "The input argument `head_mask` was split into two arguments `head_mask` and `decoder_head_mask`. Currently, `decoder_head_mask` is set to copy `head_mask`, but this feature is deprecated and will be removed in future versions. If you do not want to use any `decoder_head_mask` now, please set `decoder_head_mask = torch.ones(num_layers, num_heads)`."
+
 
 
 @dataclasses.dataclass
@@ -55,13 +54,15 @@ class MT5ForRegression(MT5PreTrainedModel):
     encoder_config.is_decoder = False
     encoder_config.use_cache = False
     encoder_config.is_encoder_decoder = False
-    self.encoder = MT5Stack(encoder_config, self.shared)
+    self.encoder = MT5Stack(encoder_config)
+    self.encoder.set_input_embeddings(self.shared)
 
     decoder_config = copy.deepcopy(config)
     decoder_config.is_decoder = True
     decoder_config.is_encoder_decoder = False
     decoder_config.num_layers = config.num_decoder_layers
-    self.decoder = MT5Stack(decoder_config, self.shared)
+    self.decoder = MT5Stack(decoder_config)
+    self.decoder.set_input_embeddings(self.shared)
 
     self.lm_head = nn.Linear(config.d_model, config.vocab_size, bias=False)
 
