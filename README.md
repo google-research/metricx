@@ -149,6 +149,19 @@ correlations with human ratings.
 
 ## Usage
 
+For inference only, install the dependencies from `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+If you also want to run the meta-evaluation scripts, install the
+`mt-metrics-eval` dependency separately:
+
+```bash
+pip install git+https://github.com/google-research/mt-metrics-eval
+```
+
 The `metricx24/predict.py` and `metricx23/predict.py` scripts contain examples
 for how to run inference on the models.
 
