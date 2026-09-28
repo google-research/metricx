@@ -129,7 +129,7 @@ class MT5ForRegression(MT5PreTrainedModel):
       torch.cuda.set_device(self.decoder.first_device)
 
     # Create 1 step of dummy input for the decoder.
-    batch_size = input_ids.size(0)
+    batch_size = hidden_states.size(0)
     decoder_input_ids = torch.LongTensor([0]).repeat(batch_size).reshape(-1, 1)
     if torch.cuda.is_available():
       decoder_input_ids = decoder_input_ids.to(torch.device("cuda"))
